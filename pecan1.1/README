@@ -1,0 +1,13 @@
+This is the source code for the Predictive Ecosystem Analyzer, version 1.1.
+
+See the PECAn home page for project details: www.pecanproject.org
+
+Instructions for using this PEcAn 1.1 can be found in the pecan11_manual.html and at the PEcAn 1.1 development page: https://ebi-forecast.igb.illinois.edu/redmine/projects/pecan-1-0
+
+The PEcAn and ED2.1 configuration files used in the analysis are located in the /inst/in/ebifarm folder.
+
+Submit bugs to David LeBauer, dlebauer@illinois.edu
+
+Version 1.1 is provided as supporting material to the manuscript: "Facilitating feedbacks between field measurements and ecosystem models" by David S. LeBauer, Dan Wang, Katherine T. Richter, Carl C. Davidson, and Michael C. Dietze, published in Ecological Monographs.
+
+The authors recommend using the most recent version of PEcAn (1.2.6 as of 08/06/2012) available when starting a new research project.

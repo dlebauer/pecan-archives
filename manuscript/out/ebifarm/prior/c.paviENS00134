@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE config SYSTEM "ed.dtd">
+<config>
+ <radiation>
+  <lai_min>0.05</lai_min>
+ </radiation>
+ <ed_misc>
+  <output_month>12</output_month>
+ </ed_misc>
+ <pft>
+  <num>15</num>
+  <phenology>2</phenology>
+  <max_dbh>0.78</max_dbh>
+  <hgt_min>2.0</hgt_min>
+  <dark_respiration_factor>0.015</dark_respiration_factor>
+  <qsw>0.0</qsw>
+  <mort1>1.0</mort1>
+  <plant_min_temp>-100</plant_min_temp>
+  <storage_turnover_rate>0</storage_turnover_rate>
+  <mort2>14.9720382736782</mort2>
+  <growth_resp_factor>0.612786460446686</growth_resp_factor>
+  <leaf_turnover_rate>7.11172093119396</leaf_turnover_rate>
+  <leaf_width>0.00313479811279208</leaf_width>
+  <nonlocal_dispersal>0.174984160181785</nonlocal_dispersal>
+  <q>1.70194629402991</q>
+  <root_turnover_rate>1.10227544063247</root_turnover_rate>
+  <seedling_mortality>0.639986743933025</seedling_mortality>
+  <stomatal_slope>4.47543335926558</stomatal_slope>
+  <r_fract>0.376174640363097</r_fract>
+  <root_respiration_factor>1.56273811803806</root_respiration_factor>
+  <Vm_low_temp>10.3274844334438</Vm_low_temp>
+  <SLA>22.8127104268374</SLA>
+  <Vm0>9.66746923703408</Vm0>
+  <quantum_efficiency>0.0638380269302445</quantum_efficiency>
+ </pft>
+</config>

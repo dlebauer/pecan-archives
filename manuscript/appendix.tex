@@ -1,0 +1,274 @@
+\documentclass[12pt]{article}
+
+%% Math
+\usepackage{amsmath}  % for math formulas
+\usepackage{amssymb}  % for math symbols
+\usepackage{bm}
+\renewcommand{\vec}[1]{\bm{#1}} %% define vector notation
+
+%% Tables
+\usepackage{rotating} % enable sidewaystable
+\usepackage{longtable} % used for long tables of data in appendix
+\usepackage{booktabs}  % also for long tables of data in appendix
+\usepackage{subfig}
+%% Figures
+\usepackage{graphicx}
+%% all fig. legends on a separate page
+%% http://tex.stackexchange.com/q/30477/1783
+\usepackage{caption}
+\usepackage{letltxmacro}% http://ctan.org/pkg/letltxmacro
+\captionsetup{labelsep=none}
+\DeclareCaptionTextFormat{none}{} \captionsetup{labelsep=none,textformat=none}
+
+%% Text layout
+\usepackage{setspace} 
+\usepackage{geometry}
+\geometry{verbose,a4paper,tmargin=2.4cm,bmargin=2.4cm,lmargin=2.4cm,rmargin=2.4cm}
+\usepackage{lineno}
+\linenumbers
+\usepackage{Sweave}% use of Sweave with R code
+\usepackage{natbib}
+\bibliographystyle{ecology}
+
+\title{Appendix}
+\date{} % Leave date blank
+\begin{document}
+
+\begin{flushleft}
+\begin{spacing}{1.9}
+
+
+\section{Switchgrass Data}
+\end{spacing}
+\begin{spacing}{1}
+\label{app:data}
+All data used in the present analysis, along with site, citation, and treatment information, are available in the BETY database. Each data point is identified by a unique trait\_id: id is the primary key in the traits table, and trait\_id is the foregin key in auxillary tables (Appendix B).
+
+\subsection*{Present study data}
+ 
+\subsubsection*{Vcmax and SLA}
+V$_{\text{cmax}}$ and SLA measurements were made on four year old switchgrass (\emph{P.~virgatum}) stands were grown in an agricultural study site in Savoy, IL (40$^o$10'20"N, 88$^o$11'40"W, 228 m above sea level).
+Gas exchanges were measured on leaves with a portable infrared gas analyzer (LI-COR 6400LCF; Li-COR, Lincoln, NE). 
+During measurements, leaves were exposed to a CO$_2$ concentration of 370 $\mu$mol mol$^{-1}$, temperature at $25^o$C, vapor pressure deficit (VPD) at the leaf surface 1.5 kPa and airflow through the chamber 250 $\mu$mol s$^{-1}$. For the CO$_2$ response (A-Ci) curves, leaves were acclimated for 30-60 minutes before adjusting the CO$_2$ concentrations. 
+Thereafter, CO$_2$ concentration was decreased in 5 steps (400, 300, 200, 100 and 50 ppm CO$_2$) and then increased in 3 steps (400, 600 and 800 μmol mol-1 CO$_2$). A-Ci curves were fitted to a coupled photosynthesis-stomatal conductance model \citep{collatz1992cps}. 
+The rate saturated region of the A-Ci curves were used to estimate maximum Rubisco activity (Vcmax) \citep{miguez2009smp}. 
+
+SLA was computed as the ratio of leaf area to mass. Ten 0.5 cm$^2$ leaf punches from 4 different plants were taken and oven-dried at 65 $^o$C for two weeks and then weighed.
+
+\subsubsection*{Stomatal Slope data}
+
+Stomatal slope was estimated using measurements of four leaves from each of five field-grown energy crop species during the 2010 growing season. 
+The five species included two C4 grasses: Miscanthus (\textit{Miscanthus~x~giganteus}) and Switchgrass (\textit{P~virgatum}) planted in 2008 and three deciduous tree species: Red Maple (\textit{Acer~rubrum}), Eastern Cottonwood (\textit{Populus~deltoides}, and Sherburne Willow \textit{Salix~x~Sherburne}) planted in 2010 as 2 year old saplings. 
+ All plants were grown at the Energy Biosciences Institute Energy Farm (40$^o$10'N, 88$^o$03"W).
+
+Photosynthesis (A), stomatal conductance (gs), intercellular [CO$_2$] (ci), and humidity deficit at the leaf surface (Ds) were obtained via open gas exchange systems with 2 cm$^2$ leaf chambers housing infrared gas analyzers to measure fluxes of both CO$_2$ and water (LI-6400; LI-COR Inc., Lincoln, NE, USA). 
+Data were collected following a simplified version of the protocol described by \citet{leakey2006ltg} in which photosynthetic photon flux density was maintained at 1500 $\mu$mol m$^{-2}$ s$^{-1}$, leaf temperature was $25 \pm 3^o$C and the vapor pressure deficit from leaf to air was < 2 kPa while [CO$_2$] entering the chamber was varied stepwise (400, 250, 350, 450, 650, 850, 1200, 1500 ppm). A minimum of 20 minutes was allowed for A and gs to completely stabilize before data were collected at each [CO$_2$]. 
+ For each individual leaf, linear least squares regression was used to estimate the stomatal slope based on the \citet{ball1987mps} model of stomatal conductance (not used in present study but provided as data in appendix), and then separately for the \citet{leuning1995cac} model of stomatal conductance. A common value of $\Gamma=40 \mu$P Pa$^{-1}$, and D$_0=1500$ Pa was used in accordance with \citet{leuning1995cac}.
+
+{\small
+\begin{longtable}{rrrlr}
+  \toprule
+  Mean & n & SE & BETY trait\_id \\
+  \midrule \endhead
+  Leuning slope parameter & & & & \\*
+  \hline
+  4.35& 1& 	0.51 & 40909\\
+  3.93& 1& 	0.13 & 40910\\
+  3.74& 1& 	0.21 & 40911\\
+  4.37& 1& 	0.33 & 40912\\
+  \hline
+  SLA ($g C/ m^2$) & & & & \\*
+  \hline
+  34.5 &  2 & 12.2  & 2592 \\* 
+  28.4 &  2 & 4.7  & 2593 \\* 
+  32.1 &  2 & 3.6  & 2597 \\* 
+  30.5 &  2 & 5.7  & 2598 \\* 
+  \hline
+  Vcmax & & &  \\*
+  \hline
+  18.1 &  2 & 6.2 & 2638 \\* 
+  16.3 &  2 & 2.9 & 2639 \\* 
+  8.9 &  2 & 4.8  & 2640 \\* 
+  8.8 &  2 & 6.97 & 2641 \\* 
+  20.8 &  2 & 7.5 & 2642 \\* 
+  14.4 &  2 & 5.8 & 2643 \\* 
+  16.9 &  2 & 8.4 & 2644 \\* 
+  6.2 &  2 & 2.1  & 2645 \\
+  \hline
+  \bottomrule
+  \caption{ Unpublished switchgrass trait data collected for the present analysis.}
+\end{longtable}
+}
+\newpage
+\subsection*{Previously published data}
+\begin{longtable}{rrrlr}
+  \toprule
+  Mean & n & SE & citation & BETY trait\_id \\
+  \midrule \endhead
+  SLA ($g C/ m^2$) & & & & \\*
+  \hline
+  38.8 &  2 & 1.0 & \citet{knapp1995efd} & 132 \\* 
+  40.6 &  2 & 2.2 & \citet{knapp1995efd} & 133 \\* 
+  40.8 &  8 &  & \citet{byrd2000pcs} & 281 \\* 
+  39.6 &  8 &  & \citet{byrd2000pcs} & 282 \\* 
+  49.5 &  8 &  & \citet{byrd2000pcs} & 283 \\* 
+  51.7 &  4 &  & \citet{byrd2000pcs} & 285 \\* 
+  53.3 &  4 &  & \citet{byrd2000pcs} & 286 \\* 
+  46.4 &  4 &  & \citet{byrd2000pcs} & 287 \\* 
+  54.2 &  4 &  & \citet{byrd2000pcs} & 288 \\* 
+  58.0 &  4 &  & \citet{byrd2000pcs} & 289 \\* 
+  52.8 &  4 &  & \citet{byrd2000pcs} & 290 \\* 
+  45.2 &  4 &  & \citet{trocsanyi2009ycc} & 8478 \\* 
+  37.9 &  4 &  & \citet{trocsanyi2009ycc} & 8482 \\* 
+  38.5 &  4 &  & \citet{trocsanyi2009ycc}  & 8487 \\
+  \hline
+  \hline
+  fine root:leaf & & & &  \\*
+  \hline
+  0.59 &  4 &  & \citet{kiniry1999rue} & 22092 \\* 
+  2.73 &  4 &  & \citet{kiniry1999rue} & 22093 \\* 
+  0.43 &  4 &  & \citet{kiniry1999rue} & 22094 \\* 
+  1.5 &  4 &  & \citet{kiniry1999rue}  & 22095 \\* 
+  1.81 &  2 & 0.27 & \citet{tjoelker2005llr} & 25670 \\* 
+  0.74 &  2 & 0.30 & \citet{tjoelker2005llr} & 25675 \\
+  \hline
+
+  \newpage
+  \hline
+  leaf width (mm) & & & & \\*
+  \hline
+  10.2 & 2 & 0.27 & \citet{knapp1995efd} & 136 \\* 
+  5.9 &  2 & 0.23 & \citet{knapp1995efd} & 137 \\* 
+  5.0 &  2 & 0.18 & \citet{redfearn1997cam} & 332 \\* 
+  4.9 &  2 & 0.18 & \citet{redfearn1997cam} & 333 \\* 
+  6.4 &  2 & 0.18 & \citet{redfearn1997cam} & 334 \\* 
+  6.3 &  2 & 0.18 & \citet{redfearn1997cam} & 335 \\* 
+  6.2 &  2 & 0.18 & \citet{redfearn1997cam} & 336 \\* 
+  7.2 &  2 & 0.18 & \citet{redfearn1997cam} & 337 \\* 
+  5.2 &  2 & 0.18 & \citet{redfearn1997cam} & 338 \\* 
+  4.6 &  2 & 0.18 & \citet{redfearn1997cam} & 339 \\* 
+  6.2 &  2 & 0.18 & \citet{redfearn1997cam} & 340 \\* 
+  5.8 &  2 & 0.18 & \citet{redfearn1997cam} & 341 \\* 
+  4.6 &  2 & 0.18 & \citet{redfearn1997cam} & 342 \\* 
+  6.8 &  2 & 0.18 & \citet{redfearn1997cam} & 343 \\* 
+  6.8 &  2 & 0.18 & \citet{redfearn1997cam} & 344 \\* 
+  6.6 &  2 & 0.18 & \citet{redfearn1997cam} & 345 \\* 
+  7.9 &  2 & 0.18 & \citet{redfearn1997cam} & 346 \\* 
+  7.4 &  2 & 0.18 & \citet{redfearn1997cam} & 347 \\* 
+  6.7 &  2 & 0.18 & \citet{redfearn1997cam} & 348 \\* 
+  7.0 &  2 & 0.18 & \citet{redfearn1997cam} & 349 \\* 
+  4.8 &  2 & 0.18 & \citet{redfearn1997cam} & 386 \\* 
+  4.8 &  2 & 0.18 & \citet{redfearn1997cam} & 387 \\* 
+  6.2 &  2 & 0.18 & \citet{redfearn1997cam} & 388 \\* 
+  5.8 &  2 & 0.18 & \citet{redfearn1997cam} & 389 \\* 
+  4.7 &  2 & 0.18 & \citet{redfearn1997cam} & 390 \\* 
+  7.7 &  2 & 0.18 & \citet{redfearn1997cam} & 391 \\* 
+  4.6 &  2 & 0.18 & \citet{redfearn1997cam} & 392 \\* 
+  5.6 &  2 & 0.18 & \citet{redfearn1997cam} & 393 \\* 
+  7.3 &  2 & 0.18 & \citet{redfearn1997cam} & 394 \\* 
+  6.6 &  2 & 0.18 & \citet{redfearn1997cam} & 395 \\* 
+  7.3 &  2 & 0.18 & \citet{redfearn1997cam} & 396 \\* 
+  7.0 &  2 & 0.18 & \citet{redfearn1997cam} & 397 \\* 
+  5.1 &  2 & 0.18 & \citet{redfearn1997cam} & 398 \\* 
+  4.7 &  2 & 0.18 & \citet{redfearn1997cam} & 399 \\* 
+  5.8 &  2 & 0.18 & \citet{redfearn1997cam} & 400 \\* 
+  6.4 &  2 & 0.18 & \citet{redfearn1997cam} & 401 \\* 
+  5.0 &  2 & 0.18 & \citet{redfearn1997cam} & 402 \\* 
+  7.0 &  2 & 0.18 & \citet{redfearn1997cam} & 403 \\* 
+  7.6 &  2 & 1.70 & \citet{oyarzabal2008tdb} & 453 \\ 
+  \hline
+  \caption{ Previously published switchgrass trait data used in meta-analysis}
+\end{longtable}
+\newpage
+
+\section{BETYdb}
+\label{app:betydb}
+
+ The Biofuel Ecophysiological Traits and Yields database (BETYdb, http://ebi-forecast.igb.uiuc.edu) structure (Figure \ref{fig:betydbschema}). Comprehensive documentation of database structure and web-based data entry is available at the website.
+
+\begin{figure}[ht!]    
+ \includegraphics[width=3in]{betydbschema}
+ \caption{ Database schema for the traits database.}
+ \label{fig:betydbschema}
+\end{figure}
+
+\clearpage
+\section{Transformations}
+
+% \subsection{Unit conversions}
+
+% The following non-standard conversions were used to convert data from reported units to the standardized units used in BETYdb. 
+% \begin{table}[ht]
+%   \caption{Unit conversions}
+%   \label{tab:traitconversion}
+%   \begin{tabular}{lllp{2in}}
+%     \hline
+%     from ($X$) & to ($Y$) & conversion                      & notes\\ \hline
+%      $X_1=$biomass, $X_2=$production & root turnover rate & $Y = X_2/X_1$&  \citet{gill2000gpr}\\
+%     US ton/acre &Mg/ha &$Y = X * 2.24$ & \\
+%     \% roots &root:shoot (q)& $Y=\frac{X}{1-X}$& $\% \text{roots} = \frac{\text{root biomass}}{\text{total biomass}}$ \\
+%     mm s$^{-2}$&mmol m$^{-3}$ s$^{-1}$ &$Y=X/41$ &\citet{korner1988gsc} \\
+%     mg CO$_2$ g$^{-1}$ h$^{-1}$ & $\mu$mol kg$^{-1}$ s$^{-1}$& $Y = X\times 6.31$& root respiration rate\\
+%     \hline
+%   \end{tabular}
+% \end{table}
+
+
+\subsection*{Arrhenius correction}\label{app:arrhenius}
+ Parameters for enzyme kinetics ($V_{c_{max,T_m}}$ and root respiration rate) were scaled from the measurement temperature ($T_o$) to a standard temperature ($T_m=298 K (= 25^oC)$) using an Arrhenius correction:
+$$V_{c_{max,T_m}}=\frac{V_{c_{max,T_0}}}{e^{3000*(1/(T_o)-1/(T_m))}}$$  
+
+\subsection*{Estimating SE from reported statistics}\label{app:seest}
+
+Often, differences between treatments are reported with P-values, least significant differences (LSD), and other statistics but provide no direct estimate of the variance.
+It is reasonable to always assume that the statistics were calculated using the assumption that the data are normally distributed.
+
+\begin{enumerate}
+\item given MSE and $n$
+ $$SE=\sqrt{MSE/n}$$
+\item given $P$, $n$, and treatment means $\bar X_1$ and $\bar X_2$
+
+$$SE=\frac{\bar X_1-\bar X_2}{t_{(1-\frac{P}{2},2n-2)}\sqrt{2/n}}$$
+
+\item given LSD, $\alpha$, $n$, $b$ where $b$ is number of blocks $^{1}$, and $n=b$unless otherwise specified for a randomized complete block design \citep{rosenberg2004map}:
+
+$$SE = \frac{LSD}{t_{(0.975,n)}\sqrt{2bn}}$$
+
+\item given MSD (minimum significant difference) given $n$, $\alpha$, df = $2n-2$  \citep{wang2000asp}
+
+$$SE = \frac{MSD}{t_{(0.975, 2n-2)}\sqrt{2}}$$
+
+\item given a 95\% Confidence Interval (measured from mean to upper or lower confidence limit), $\alpha$, and $n$  \citep{saville2003bsi}
+$$SE = \frac{CI}{t_{(\alpha/2,n)}}$$
+\item given Tukey's HSD, $n$, where $q$ is the `studentized range statistic', $$SE = \frac{HSD}{q_{(0.975,n)}}$$
+\item To solve for $MSE$ given $F$, $df_{\textrm{group}}$, and $SS$ (required when a partial anova table is provided)
+The definition $F = MS_g/MS_e$, where $g$ indicates the group, or treatment can be rearranged to solve for the MSE: $MS_e=MS_g/F$
+ Then if $MS_x = SS_x/df_x$, we can substitute $SS_g/df_g$ for $MS_g$ in the definition of $F$: $F=\frac{SS_g/df_g}{MS_e}$ and then solve for $MS_e$: $MS_e = \frac{SS_g}{df_g\times F}$.
+
+\end{enumerate}
+ In the present study, all required transformations were done prior to entry in the database using these formulas. 
+ Subsequently, the PEcAn function \texttt{transformstats} has been developed to automate transformations of SD, MSE, LSD, 95\%CI, HSD, and MSD to conservative estimates of SE.
+
+\subsection*{Calculating precision from SE}
+
+Given variance ($\sigma^2=\frac{1}{N}\sum(i_i-\mu)^2$), sd $\left(\sigma=\sqrt{\sigma^2}=\sqrt{\frac{1}{N}\sum(i_i-\mu)^2}\right)$, and se ($se=\frac{\sigma}{\sqrt{n}}$), calculate precision $\tau$:
+
+$$\sigma=se*\sqrt{n}$$
+$$\sigma^2=se^2*n$$
+$$\tau=\frac{1}{\sigma^2}=\frac{1}{se^2*n}$$
+
+\section{Derivation of a Gamma prior on $\tau$}
+
+$$\tau \sim G(\frac{n}{2}, \frac{\sum_{i=1}^{n}(\mu-x_i)^2}{2})$$
+
+$$1/\tau_0=\sigma^2=\frac{\sum_{i=1}^{n}(\mu-x_i)^2}{n}$$
+
+$$n/\tau_0=n\sigma^2=\sum_{i=1}^{n}(\mu-x_i)^2$$
+  
+$$\tau \sim IG(\frac{n}{2}, \frac{n}{2\tau})$$
+
+\newpage
+\bibliography{pecan_manuscript}
+\end{spacing}
+\end{flushleft}
+\end{document}

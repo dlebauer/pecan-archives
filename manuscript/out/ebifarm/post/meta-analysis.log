@@ -1,0 +1,439 @@
+Each meta-analysis will be run with: 
+50000 total iterations,
+4 chains, 
+a burnin of 25000 samples,
+, 
+thus the total number of samples will be 1e+05
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ SLA 
+
+------------------------------------------------
+prior for SLA:weib(2.06, 0.002321)
+data max: 27.86 
+data min: 10.3 
+mean: 19.6 
+n: 24
+stem plot of data points
+
+  The decimal point is 1 digit(s) to the right of the |
+
+  1 | 0334
+  1 | 55778999
+  2 | 0012244
+  2 | 55668
+
+stem plot of obs.prec:
+
+  The decimal point is 1 digit(s) to the left of the |
+
+  0 | 0000011
+  1 | 79
+  2 | 7
+
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+   Graph Size: 203
+
+Initializing model
+
+
+Iterations = 105:50100
+Thinning interval = 5 
+Number of chains = 4 
+Sample size per chain = 10000 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+                Mean     SD  Naive SE Time-series SE
+beta.ghs[2]   6.3112 2.7802 0.0139010       0.078421
+beta.o       16.1101 1.8366 0.0091828       0.051528
+beta.site[1]  3.0344 1.9410 0.0097052       0.049946
+beta.site[2]  0.5131 2.2138 0.0110689       0.049039
+beta.site[3]  1.6689 2.2672 0.0113361       0.046473
+beta.site[4] -1.3251 2.2720 0.0113598       0.046805
+beta.site[5] -1.6174 1.9065 0.0095325       0.050050
+beta.site[6]  2.6345 1.9099 0.0095494       0.050581
+beta.site[7] -4.4684 2.2318 0.0111591       0.043194
+beta.trt[2]  -0.4735 1.1133 0.0055663       0.006739
+beta.trt[3]  -3.2406 1.1113 0.0055563       0.005466
+beta.trt[4]   3.1322 1.1172 0.0055861       0.005696
+beta.trt[5]   0.7136 1.0238 0.0051190       0.005179
+beta.trt[6]  -0.1858 1.0312 0.0051559       0.005005
+sd.site       3.5346 1.5535 0.0077675       0.020532
+sd.trt        2.6957 1.3151 0.0065757       0.006191
+sd.y          2.8463 0.1943 0.0009714       0.001003
+
+2. Quantiles for each variable:
+
+                2.5%      25%     50%       75%  97.5%
+beta.ghs[2]   0.5715  4.67210  6.3449  7.992894 11.861
+beta.o       12.2090 15.02756 16.1479 17.248309 19.700
+beta.site[1] -0.6470  1.79667  2.9478  4.190908  7.176
+beta.site[2] -3.7393 -0.81820  0.4416  1.792887  5.182
+beta.site[3] -2.6183  0.28320  1.5740  2.969053  6.517
+beta.site[4] -5.8165 -2.69936 -1.3360  0.006337  3.312
+beta.site[5] -5.3874 -2.80230 -1.6240 -0.467631  2.311
+beta.site[6] -1.0367  1.43120  2.5706  3.780097  6.632
+beta.site[7] -9.2179 -5.84231 -4.3477 -2.970668 -0.383
+beta.trt[2]  -2.6656 -1.21551 -0.4691  0.273590  1.702
+beta.trt[3]  -5.4283 -3.99273 -3.2332 -2.487532 -1.069
+beta.trt[4]   0.9781  2.37416  3.1190  3.879031  5.350
+beta.trt[5]  -1.2632  0.02334  0.6998  1.387708  2.763
+beta.trt[6]  -2.2189 -0.87433 -0.1818  0.505815  1.826
+sd.site       1.5900  2.50704  3.2013  4.186323  7.362
+sd.trt        1.0950  1.85582  2.4102  3.196811  5.957
+sd.y          2.4796  2.71216  2.8424  2.974925  3.241
+
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ leaf_width 
+
+------------------------------------------------
+prior for leaf_width:gamma(6.53, 1.49)
+data max: 10.24 
+data min: 4.6 
+mean: 6.2 
+n: 39
+stem plot of data points
+
+  The decimal point is at the |
+
+   4 | 66677889
+   5 | 001268889
+   6 | 22234466788
+   7 | 0002334679
+   8 | 
+   9 | 
+  10 | 2
+
+stem plot of obs.prec:
+
+  The decimal point is 2 digit(s) to the right of the |
+
+  0 | 011
+  1 | 
+  2 | 
+  3 | 
+  4 | 
+  5 | 666666666666666666666666666666666666
+
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+   Graph Size: 273
+
+Initializing model
+
+
+Iterations = 105:50100
+Thinning interval = 5 
+Number of chains = 4 
+Sample size per chain = 10000 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+                 Mean        SD  Naive SE Time-series SE
+beta.ghs[2]   1.67071 9.683e-01 4.842e-03      3.730e-02
+beta.o        5.85976 5.558e-01 2.779e-03      3.226e-02
+beta.site[1]  0.03733 5.637e-01 2.819e-03      3.160e-02
+beta.site[2] -0.15972 5.559e-01 2.779e-03      3.224e-02
+beta.site[3]  0.54851 5.585e-01 2.792e-03      3.239e-02
+beta.site[4]  0.06858 9.157e-01 4.578e-03      3.930e-02
+beta.trt[2]   4.33320 2.810e-01 1.405e-03      1.948e-03
+sd.site       0.67852 7.803e-01 3.902e-03      3.844e-02
+sd.trt       38.32901 1.018e+03 5.088e+00      5.262e+00
+sd.y          0.45963 8.898e-03 4.449e-05      3.932e-05
+
+2. Quantiles for each variable:
+
+                 2.5%     25%      50%      75%    97.5%
+beta.ghs[2]  -0.07601  1.2446  1.63503  2.05056   3.6553
+beta.o        4.35096  5.7357  5.95132  6.13287   6.5925
+beta.site[1] -0.74742 -0.2427 -0.04287  0.18249   1.5199
+beta.site[2] -0.89705 -0.4308 -0.24813 -0.03469   1.3379
+beta.site[3] -0.18433  0.2735  0.45404  0.67607   2.0689
+beta.site[4] -1.44902 -0.3010  0.01697  0.33434   1.8938
+beta.trt[2]   3.78517  4.1437  4.33195  4.52216   4.8877
+sd.site       0.19665  0.3300  0.47157  0.73515   2.4993
+sd.trt        1.90723  3.7066  6.31028 13.27684 128.8412
+sd.y          0.44235  0.4536  0.45953  0.46555   0.4773
+
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ Vcmax 
+
+------------------------------------------------
+prior for Vcmax:weib(3.55, 1.137e-05)
+data max: 29.43 
+data min: 20.41 
+mean: 24.6 
+n: 4
+stem plot of data points
+
+  The decimal point is at the |
+
+  20 | 4
+  22 | 1
+  24 | 6
+  26 | 
+  28 | 4
+
+stem plot of obs.prec:
+
+  The decimal point is 4 digit(s) to the left of the |
+
+  0 | 011
+  0 | 
+  1 | 
+  1 | 
+  2 | 1
+
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+   Graph Size: 37
+
+Initializing model
+
+
+Iterations = 105:50100
+Thinning interval = 5 
+Number of chains = 4 
+Sample size per chain = 10000 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+               Mean      SD Naive SE Time-series SE
+beta.o      24.1914   3.041  0.01521        0.01609
+beta.trt[2]  0.2352   2.697  0.01349        0.01400
+sd.trt      14.9320 670.072  3.35036        3.33343
+sd.y        12.1563   2.182  0.01091        0.01056
+
+2. Quantiles for each variable:
+
+                2.5%     25%      50%    75%  97.5%
+beta.o      18.11612 22.2256 24.22618 26.174 30.184
+beta.trt[2] -5.51087 -0.4963  0.03579  0.776  6.933
+sd.trt       0.09834  0.3711  1.17356  3.976 48.159
+sd.y         8.12427 10.6425 12.07085 13.586 16.651
+
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ fineroot2leaf 
+
+------------------------------------------------
+NO ERROR STATS PROVIDED, DROPPING RANDOM EFFECTS
+prior for fineroot2leaf:lnorm(0.811, 1.407)
+data max: 2.73 
+data min: 0.43 
+mean: 1.31 
+n: 4
+stem plot of data points
+
+  The decimal point is at the |
+
+  0 | 4
+  0 | 6
+  1 | 
+  1 | 5
+  2 | 
+  2 | 7
+
+no estimates of SD for fineroot2leaf
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+   Graph Size: 25
+
+Initializing model
+
+
+Iterations = 105:50100
+Thinning interval = 5 
+Number of chains = 4 
+Sample size per chain = 10000 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+        Mean     SD Naive SE Time-series SE
+beta.o 1.381 0.5449 0.002725       0.003066
+sd.y   2.594 1.4441 0.007220       0.006730
+
+2. Quantiles for each variable:
+
+         2.5%   25%   50%   75% 97.5%
+beta.o 0.4924 1.025 1.332 1.669 2.572
+sd.y   1.1722 1.734 2.224 2.996 6.203
+
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ root_respiration_rate 
+
+------------------------------------------------
+prior for root_respiration_rate:weib(2.66, 0.007509)
+data max: 5.1246967663246 
+data min: 5.1246967663246 
+mean: 5.12 
+n: 1
+stem plot of data points
+stem plot of obs.prec:
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+   Graph Size: 16
+
+Initializing model
+
+
+Iterations = 105:50100
+Thinning interval = 5 
+Number of chains = 4 
+Sample size per chain = 10000 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+        Mean     SD Naive SE Time-series SE
+beta.o 5.143 0.7163 0.003581       0.003798
+sd.y   1.225 0.5121 0.002561       0.005073
+
+2. Quantiles for each variable:
+
+         2.5%    25%   50%   75% 97.5%
+beta.o 3.6807 4.7364 5.135 5.540 6.642
+sd.y   0.3775 0.8462 1.181 1.549 2.340
+
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ root_turnover_rate 
+
+------------------------------------------------
+prior for root_turnover_rate:weib(1.67, 2.017)
+data max: 0.74 
+data min: 0.74 
+mean: 0.74 
+n: 1
+stem plot of data points
+stem plot of obs.prec:
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+   Graph Size: 16
+
+Initializing model
+
+
+Iterations = 105:50100
+Thinning interval = 5 
+Number of chains = 4 
+Sample size per chain = 10000 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+         Mean     SD Naive SE Time-series SE
+beta.o 0.6591 0.2234 0.001117       0.001183
+sd.y   0.4614 0.1948 0.000974       0.003201
+
+2. Quantiles for each variable:
+
+         2.5%    25%    50%    75%  97.5%
+beta.o 0.2048 0.5163 0.6684 0.7974 1.1097
+sd.y   0.1202 0.3196 0.4479 0.5840 0.8831
+
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ stomatal_slope 
+
+------------------------------------------------
+prior for stomatal_slope:weib(3.63, 0.007785)
+data max: 4.36 
+data min: 3.74 
+mean: 4.1 
+n: 4
+stem plot of data points
+
+  The decimal point is 1 digit(s) to the left of the |
+
+  36 | 4
+  38 | 3
+  40 | 
+  42 | 56
+
+stem plot of obs.prec:
+
+  The decimal point is 2 digit(s) to the right of the |
+
+  0 | 023
+  2 | 
+  4 | 
+  6 | 
+  8 | 8
+
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+   Graph Size: 25
+
+Initializing model
+
+
+Iterations = 105:50100
+Thinning interval = 5 
+Number of chains = 4 
+Sample size per chain = 10000 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+         Mean      SD  Naive SE Time-series SE
+beta.o 4.0881 0.11774 0.0005887      0.0005694
+sd.y   0.3327 0.05761 0.0002880      0.0003020
+
+2. Quantiles for each variable:
+
+         2.5%    25%    50%   75%  97.5%
+beta.o 3.8554 4.0117 4.0886 4.165 4.3208
+sd.y   0.2313 0.2915 0.3288 0.370 0.4552
+
+JAGS model converged for ebifarm.pavi SLA 
+GD MPSRF =  1.0086 
+
+JAGS model converged for ebifarm.pavi leaf_width 
+GD MPSRF =  1.0221 
+
+JAGS model converged for ebifarm.pavi Vcmax 
+GD MPSRF =  1.0002 
+
+JAGS model converged for ebifarm.pavi fineroot2leaf 
+GD MPSRF =  1 
+
+JAGS model converged for ebifarm.pavi root_respiration_rate 
+GD MPSRF =  1.0004 
+
+JAGS model converged for ebifarm.pavi root_turnover_rate 
+GD MPSRF =  1.0003 
+
+JAGS model converged for ebifarm.pavi stomatal_slope 
+GD MPSRF =  1.0001 
+

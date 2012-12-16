@@ -1,0 +1,412 @@
+
+%% Trait PDFS
+<<>>=
+
+library(PECAn, lib.loc='~/lib/R')
+setwd('~/pecan')
+load('out20110119/pecan.samps.Rdata')
+load('madata.Rdata')
+load('out20110119/trait.defs.Rdata')
+load('out20110119/pecan.MA.Rdata')
+
+## get model ensemble agb output
+
+## get spline ensemble agb output _splagb_
+load('~/pecan/out20110119/ens.samps.Rdata')
+load('~/pecan/out20110119/splineens.Rdata')
+
+
+traits <- colnames(prior.samps)#trait.defs$id
+#priors <- query.bety.priors(pft,trstr)
+
+source('~/pecan/R/plots.R')
+source('~/pecan/R/sensitivity.R')
+source('~/pecan/R/utils.R')
+
+new2old.traits <- function(trait) {
+  trait2 <- if(trait == 'Vcmax') {
+    'Vm0'
+  } else if (trait == 'root_respiration_rate') {
+    'root_respiration_factor'
+  } else if (trait == 'fineroot2leaf') {
+    'q'
+  } else {
+    trait
+  }
+  return(trait2)
+}
+
+old2new.traits <- function(trait) {
+  trait2 <- if(trait == 'Vm0') {
+    'Vcmax'
+  } else if (trait == 'root_respiration_factor') {
+    'root_respiration_rate'
+  } else if (trait == 'q') {
+    'fineroot2leaf'
+  } else {
+    trait
+  }
+  return(trait2)
+}
+
+
+library(PECAn, lib.loc='~/lib/R')
+setwd('~/pecan')
+load('out20110119/pecan.samps.Rdata')
+load('madata.Rdata')
+load('out20110119/trait.defs.Rdata')
+load('out20110119/pecan.MA.Rdata')
+load('out20110119/trait.mcmc.Rdata')
+## for sensitivity plots
+load('~/pecan/out20110119/qpostqprior.Rdata')
+load('~/pecan/out20110119/ens.samps.Rdata')
+load('~/pecan/out20110119/splineens.Rdata')
+
+for(trait.i in c('leaf_width', 'seedling_mortality', 'fineroot2leaf',"root_respiration_rate")){
+  post.samps[, new2old.traits(trait.i) ] <- as.matrix(trait.mcmc[[trait.i]])[1:10000,'beta.o']
+}
+
+colnames(post.samps) <- colnames(prior.samps) <- sapply(colnames(post.samps), old2new.traits)
+names(qpost) <- names(qprior)  <- sapply(names(qpost), old2new.traits)
+names(splinefuns$prior) <- names(splinefuns$post)  <- sapply(names(splinefuns$prior), old2new.traits)
+
+## get model ensemble agb output
+
+## get spline ensemble agb output _splagb_
+
+
+traits <- colnames(prior.samps)#trait.defs$id
+#priors <- query.bety.priors(pft,trstr)
+
+trait.lookups <- data.frame(old = traits, new = sapply(traits,old2new.traits))
+
+@ 
+
+%% Sensitivity Plots
+<<>>=
+load('~/pecan/out20110119/qpostqprior.Rdata')
+quantiles <- pnorm(c(-3:-1,1:3))
+
+names(qpost) <- names(qprior) <- traits
+post.sa.output <- lapply(traits, function(x) splinefuns$post[[x]](qpost[[x]]))
+prior.sa.output <- lapply(traits, function(x) splinefuns$prior[[x]](qprior[[x]]))
+names(post.sa.output) <- names(prior.sa.output) <- sapply(traits, old2new.traits)  
+
+
+
+
+
+sensitivity.results <- sensitivity.analysis(trait.samples = as.data.frame(post.samps),
+                                            sa.samples    = as.data.frame(qpost),
+                                            sa.output     = as.data.frame(post.sa.output),
+                                            outdir        = '~/')
+
+prior.sensitivity.results <- sensitivity.analysis(trait.samples = as.data.frame(prior.samps),
+                                                  sa.samples    = as.data.frame(qprior),
+                                                  sa.output     = as.data.frame(prior.sa.output),
+                                                  outdir        = '~/')
+
+sa.samples          <- sensitivity.results$sensitivity.plot.inputs$sa.samples
+prior.sa.samples    <- prior.sensitivity.results$sensitivity.plot.inputs$sa.samples
+sa.splines       <- sensitivity.results$sensitivity.plot.inputs$sa.splines
+prior.sa.splines <- prior.sensitivity.results$sensitivity.plot.inputs$sa.splines
+
+plot.order <- order(abs(sensitivity.results$variance.decomposition.plot.inputs$sensitivities), decreasing = TRUE)
+
+sa.plots <-  lapply(traits[plot.order], 
+                    function(trait) plot.sensitivity(sa.sample = sa.samples[[trait]], 
+                                                     sa.spline = sa.splines[[trait]], 
+                                                     trait = trait,###, 
+                                        #                                               y.range = c(0,50),
+                                        #                                               median.i = 4,
+                                                     prior.sa.sample = prior.sa.samples[[trait]], 
+                                                     prior.sa.spline = prior.sa.splines[[trait]],
+                                                     fontsize = list(title = 12, axis = 10))
+                    )
+
+pdf('~/research/writing/pecan/sensitivityanalysis.pdf', height = 12, width = 9)
+do.call(grid.arrange, c(sa.plots, nrow = 5, ncol = 3))
+dev.off()
+
+## this should work to get plots together
+sensitivity.results[[2]]$elasticities[4] <- 0#sensitivity.results[[2]]$elasticities[4]/1000
+prior.sensitivity.results[[2]]$elasticities[4] <- 0#prior.sensitivity.results[[2]]$elasticities[4]/1000
+
+vd.plots <- plot.variance.decomposition(sensitivity.results[[2]], outdir = '~/', prior.plot.inputs = prior.sensitivity.results[[2]])
+
+pdf('/variancedecomposition.pdf'), width = 11, height = 8)
+do.call(grid.arrange, c(vd.plots, ncol = 4))
+#grid.edit(gPath("axis_v", "axis.ticks"), grep = TRUE, gp = gpar(col = 'white'))
+
+dev.off() 
+ 
+
+## here are variance decomp plots separately:
+
+##plot.variance.decomposition(sensitivity.results[[2]], outdir = '~/post')
+##plot.variance.decomposition(prior.sensitivity.results[[2]], outdir = '~/prior')
+
+
+
+@ 
+
+<<>>=
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param trait 
+##' @param samps 
+##' @param data 
+##' @param prior.samps 
+##' @param maxn 
+##' @return plot of trait parameter density, with data and prior if available
+##' @author David LeBauer
+plot.trait.pdf <- function(trait, 
+                           post.samps = NULL, 
+                           data = NULL, 
+                           prior.dist = NULL, 
+                           maxn = 10000) {
+
+  post.exists  <- !is.null(post.samps)
+  prior.exists <- !is.null(prior.dist)
+  
+  if (post.exists) {
+    post.df  <- create.density.df(samps = post.samps)
+    samp.n <- max(length(post.samps), 100) ## 
+    n <- min(maxn, samp.n)
+    if(n < samp.n){ ## then shorten samps to length n
+      post.samps <- post.samps[sample(1:length(post.samps), n)]
+    }
+  } else if(!post.exists){
+    n <- maxn
+  }
+  
+  prior.df <- create.density.df(distribution = prior.dist)
+
+  x.breaks <- pretty(c(samps, prior.samps), 4)
+
+  samp.df <- data.frame(post  = samps,
+                        prior = prior.samps)
+  
+  fig.units <- trait.dictionary(trait)$units
+  fig.title <- trait.dictionary(trait)$figid
+  .plot <- ggplot(data = samp.df) +
+    geom_density(aes(x = post), color = 'black') +
+      theme_bw() +
+        scale_x_continuous(units, 
+                           breaks = x.breaks, 
+                           limits = range(x.breaks)) +
+          scale_y_continuous() +
+             opts(title = fig.title,
+                 axis.text.x = theme_text(size=12),
+                 axis.text.y = theme_blank(),
+                 axis.title.x = theme_text(size = 12), 
+                 axis.title.y = theme_blank(),
+                 plot.title = theme_text(size = 14),
+                 axis.ticks = theme_blank(),
+                 panel.border = theme_blank()) 
+
+  if(!is.null(nrow(tr))) {
+    plot <- plot + geom_density(aes(x = post))
+#    if(trait %in% c('leaf_width', 'seedling_mortality')) {
+      plot <- plot + geom_point(aes(x = Y, y = 0), 
+                                position = position_jitter(w=0, h = max(c(density(c(prior,post))$y)) / 40),
+                                data=tr, 
+                                size = 2, 
+                                alpha = 0.25)
+    # jitter(rep(0, nrow(tr))
+#    } else {
+#      plot <- plot + geom_point(aes(x=Y, y=0), data=tr, size = 4, alpha = 0.2) 
+#    }
+  }
+  return(plot)
+}
+
+
+
+traitpdf.plots <- lapply(lapply(traits[plot.order], old2new.traits), trait.plots)
+pdf('traitpdfs.pdf', height=12, width=9)
+do.call(grid.arrange, c(traitpdf.plots, ncol = 3, nrow = 5))
+dev.off()    
+
+@
+
+\begin{figure*}
+  \begin{centering}
+    \label{fig:traitpdfs}
+    \includegraphics[width=6.5in]{traitpdfs.pdf}
+    \caption[Trait priors and posteriors]{PDFs of priors and posteriors for each trait}
+  \end{centering}
+\end{figure*}
+
+
+% Model Ensemble Density
+<<>>=
+
+model.ensemble <- ens$agb[ens$runtype == 'post']
+model.ensemble.prior <- ens$agb[ens$runtype == 'prior']
+
+
+spline.mat <- mapply(do.call, splinefuns[['post']], lapply(as.data.frame(ens.samps[['post']]), list))
+spline.ens <-  sapply(rowSums(spline.mat - mean.f[['post']]), function(x) max(0,x+mean.f[['post']]))
+spline.inout <- data.frame(id = 1:500, ens.samps[['post']], spline.ens)
+spline.10kmat <- mapply(do.call, splinefuns[['post']], lapply(as.data.frame(ens.samps), list))
+spline.ensemble <- spline.10kens <-  sapply(rowSums(spline.10kmat - mean.f[['post']]), function(x) max(0,x+mean.f[['post']]))
+
+## get dan's pavi data _paviyield_
+paviyield <- read.csv('~/research/writing/pecan/wang2010data.csv', sep = ';', header = F)
+colnames(paviyield) <- c('site', 'cultivar', 'ecotype', 'yield')
+## Calculate and normalize the densities so that they are > 0
+##' calculate area under density curve
+##'
+##' .. content for \details{} ..
+##' @title area density calculation
+##' @param density a data.frame from as.data.frame(density(somevector))[c('x','y')]
+##' @return area under the curve (AUC)
+density.area <- function(density) {
+  x <- density$x
+  y <- density$y
+  id <- order(x)
+  AUC <- sum(diff(x[id])*rollmean(y[id],2))
+  return(AUC)
+}
+
+retained <- function(x) {
+  zeros <- x == 0
+  percent.retained <- (length(x) - sum(zeros) ) / length(x)
+}
+ 
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. returns density plot that excludes zeros and is truncated at 0
+##' @title 
+##' @param data 
+##' @param ... 
+##' @return 
+library(zoo)
+normalize.density <- function(data, ...) {
+  zeros <- data == 0
+  percent.retained <- (length(data) - sum(zeros) ) / length(data)
+  d <- as.data.frame(density(data[!zeros], ...)[c('x','y')])
+  d.trunc <- d[d$x>0, ]
+  d.trunc.area <- density.area(d.trunc)
+  d.transf <- transform(d[d$x>0,], y = y * percent.retained / d.trunc.area)
+  if(abs(density.area(d.transf) - percent.retained) > 0.01) {
+    print(paste("area = ", density.area(d.transf)))
+    print(paste("percent.retained = ", percent.retained))
+    stop('densities transformation error; check your math!')
+  } else {
+    print(paste("area = ", density.area(d.transf)))
+    print(paste("percent.retained = ", percent.retained))
+    return(d.transf) 
+  }
+}
+
+
+theme_set(theme_bw())
+ 
+opt <- opts(axis.text.y = theme_text(size = 14),
+            axis.text.x = theme_text(size=14, vjust = -2),
+            axis.title.x = theme_text(size = 14, vjust = 3), 
+            axis.title.y = theme_text(size = 14, angle = 90),
+            panel.grid.major = theme_blank(),
+            panel.grid.minor = theme_blank(),
+            panel.border = theme_blank(),
+            legend.position = "none",
+            axis.color = 'black',
+            axis.ticks = theme_blank())
+ 
+wang.y <- 0.1
+heaton.y <- wang.y - 0.01
+
+## zerobar.width <- 2.7
+## zerobar.height <- 0.25/zerobar.width
+## spline.offset <- splinefun(spline.density)(zerobar.width)
+
+## xlim=c(-1,100)
+## dens.plot <- ggplot() +  coord_cartesian(xlim=xlim) + 
+##   geom_smooth(xseq = 1:100, se = FALSE, data = spline.density, aes(x = x, y = y), size = 1, color = 'gray', fill = 'white') + 
+## #  geom_rect(aes(xmin=0, ymin=0, xmax=zerobar.width, ymax= zerobar.height + spline.offset), 
+## #            size = 1, fill = 'white', color = 'gray') + 
+## #  geom_line(aes(x=c(zerobar.width, zerobar.width),y=c(0, spline.offset)), color = 'white', size = 1.4) + 
+##   geom_smooth(xseq = 1:100, se = FALSE, data = model.density, aes(x = x, y = y), size = 1.4) + 
+##   geom_smooth(xseq = 1:100, se = FALSE, data = prior.model.density, aes(x = x, y = y), size = 1, linetype = 2) + 
+##   geom_text(aes(x = 15, y = 0.037), label = 'ED ensemble', hjust = 0) +
+##   geom_text(aes(x = 23, y = 0.02), label = 'ED prior ensemble', hjust = 0) +
+##   geom_text(aes(x = 50, y = 0.01), label = 'spline ensemble', hjust = 0, color = "grey") +
+##   ## Data from Wang et al 2010
+##   geom_segment(aes(x= 4.9, y = wang.y, xend = 15.7,  yend = wang.y), size = 1.4) +
+##   geom_segment(aes(x = quantile(paviyield$yield, 0.05), 
+##                    xend = quantile(paviyield$yield, 0.95), y = wang.y, yend = wang.y), 
+##                size = 0.4) + # 95%CI range
+##   geom_point(aes(x = 10.3, y = wang.y), size = 4, fill = 'black', shape = 5) + 
+##   geom_text(aes(x = 25, y = wang.y), label = 'Wang et al. 2010, n = 1902', hjust = 0) +
+##   ## Data from Heaton et al 2008
+##   geom_segment(aes(x= 10.8, y = heaton.y, xend = 15.2,  yend = heaton.y), size = 1.4) + # mean +/- SD
+##   geom_segment(aes(x= 9.4, y = heaton.y, xend = 16.6,  yend = heaton.y), size = 0.4) + # 95%CI
+##   geom_point(aes(x = 13, y = heaton.y), size = 4, fill = 'black', shape = 5) + 
+##   geom_text(aes(x = 25, y = heaton.y), label = 'Heaton et al. 2008, n = 4', hjust = 0) +
+##   geom_segment(aes(x = 0, y = 0, xend = 100, yend = 0)) 
+
+## pdf('research/writing/pecan/ensembledensity.pdf')
+## dens.plot + opt +  scale_color_grey(end = 0.7)
+## dev.off()
+##  axis.title.x("December Aboveground Biomass of Switchgrass, Mt / ha")
+spline.breaks <- unique(c(dhist(rnorm(1000), nbins = 24)$xbr, 0,100))
+spline.breaks <- unique(c(dhist(spline.ensemble, nbins = 24)$xbr, 0,100))
+prior.breaks <- unique(c(dhist(model.ensemble.prior, nbins = 24)$xbr, 0,100))
+post.breaks <- unique(c(dhist(model.ensemble, nbins = 24)$xbr, 0,100))
+
+x.ticks <- pretty(c(0,100))
+y.ticks <- c(0, 0.10, 0.20, 0.30)
+dens.plot <- ggplot() +  coord_cartesian(xlim=xlim) + 
+  geom_step(aes(x = spline.ensemble, y = ..density..), 
+            stat = 'bin', size = 0.3,
+            breaks = spline.breaks, #dhist(spline.ensemble, nbins = nbins), 
+  #          position = 'dodge', 
+            color = 'grey50') + 
+  geom_step(aes(model.ensemble, y = ..density..), 
+            stat = 'bin', size = 1,  
+            breaks = post.breaks, #dhist(model.ensemble, nbins = nbins), 
+ #           position = 'dodge',  
+            color = 'black') + 
+  geom_step(aes(model.ensemble.prior, y = ..density..), 
+            stat = 'bin', size = 0.6,
+            breaks = prior.breaks, #dhist(model.ensemble.prior, nbins = nbins), 
+#            position = 'dodge',  
+            color = 'grey35') + 
+  geom_text(aes(x = 15, y = 0.06), label = 'ED ensemble', hjust = 0) +
+  geom_text(aes(x = 40, y = 0.02), label = 'ED prior ensemble', hjust = 0, color = "grey35") +
+  geom_text(aes(x = 25, y = 0.04), label = 'spline ensemble', hjust = 0, color = "grey50") +
+  ## Data from Wang et al 2010
+  geom_segment(aes(x= 4.9, y = wang.y, xend = 15.7,  yend = wang.y), size = 1) +
+  geom_segment(aes(x = quantile(paviyield$yield, 0.05), 
+                   xend = quantile(paviyield$yield, 0.95), y = wang.y, yend = wang.y), 
+               size = 0.4) + # 95%CI range
+  geom_point(aes(x = 10.3, y = wang.y), size = 4, fill = 'black', shape = 5) + 
+  geom_text(aes(x = 20, y = wang.y), label = 'Wang et al. 2010, n = 1902', hjust = 0) +
+  ## Data from Heaton et al 2008
+  geom_segment(aes(x= 10.8, y = heaton.y, xend = 15.2,  yend = heaton.y), size = 1) + # mean +/- SD
+  geom_segment(aes(x= 9.4, y = heaton.y, xend = 16.6,  yend = heaton.y), size = 0.4) + # 95%CI
+  geom_point(aes(x = 13, y = heaton.y), size = 4, fill = 'black', shape = 5) + 
+  geom_text(aes(x = 20, y = heaton.y), label = 'Heaton et al. 2008, n = 4', hjust = 0) +
+  ## Fix Axis
+  scale_x_continuous("December Aboveground Biomass of Switchgrass, Mt / ha") + 
+  scale_y_continuous("Density", breaks = y.ticks) + 
+  geom_segment(aes(x = 0, y = 0, xend = 100, yend = 0), color = 'black') +
+  geom_segment(aes(x = x.ticks, y = 0, xend = x.ticks, yend = -0.005)) + 
+  geom_segment(aes(x = 0, y = 0, xend = 0, yend = 0.3)) +
+  geom_segment(aes(x = 0, y = y.ticks, xend = -2, yend = y.ticks))
+ 
+pdf('~/research/writing/pecan/ensemble.density.pdf', height = 8, width = 8)
+dens.plot + opt +  scale_color_grey(end = 0.5)
+dev.off()
+
+
+@ 
+
+% Variance Decomposition Plots
+<<label=vardecompplots>>=
+
+@ 

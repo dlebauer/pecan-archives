@@ -1,0 +1,91 @@
+
+
+<<echo=false,results=hide>>=
+library(PECAn)
+library(plyr)
+outdir <- '~/out/ebifarm/'
+load(paste(outdir, 'post/trait.mcmc.Rdata', sep = ''))
+@ 
+
+<<echo=false, results=hide>>=
+
+fontsize <- list(title = 18, axis = 14) 
+
+trait <- 'SLA'
+post  <- as.matrix(trait.mcmc[[trait]])
+post.densities <- alply(.data = post, .margins = 2,
+                        .fun =  create.density.df)
+names(post.densities) <- colnames(post)
+xticks <- pretty(post)
+yticks <- pretty(density(post)$y)
+units <- trait.dictionary(trait)$units
+
+xaxis <- scale_x_continuous("", breaks = xticks,
+                               labels = xticks,
+                               limits = c(-10,30))
+ 
+plot.opts <- opts(axis.text.x = theme_text(size = fontsize$axis),
+                  axis.text.y = theme_blank(),
+                  axis.title.x = theme_text(size = fontsize$axis),
+                  axis.title.y = theme_blank(),
+                  axis.ticks = theme_blank(),
+                  axis.line = theme_blank(),
+                  legend.position = "none",
+                  panel.grid.major = theme_blank(),
+                  panel.grid.minor = theme_blank(),
+                  panel.border = theme_border(type = "b"),
+                  panel.background = theme_rect(colour = "white", fill = "white"))
+
+beta.o.plot <- add.posterior.density(post.densities[['beta.o']]) + xaxis + plot.opts
+sd.y.plot <- ggplot() +   geom_line(data = post.densities[["sd.y"]], aes(x,y)) + 
+  xaxis + plot.opts
+
+beta.ghs.plot <- add.posterior.density(post.densities[['beta.ghs[2]']]) + 
+  xaxis + plot.opts
+
+beta.site.plot <- ggplot() + 
+  geom_line(data = post.densities[["beta.site[2]"]], aes(x,y)) + 
+  geom_line(data = post.densities[["beta.site[3]"]], aes(x,y), color = "grey30") +
+  geom_line(data = post.densities[["beta.site[4]"]], aes(x,y), color = "grey45") + 
+  geom_line(data = post.densities[["beta.site[5]"]], aes(x,y), color = "grey60") + 
+  geom_line(data = post.densities[["beta.site[6]"]], aes(x,y), color = "grey70") + 
+  geom_line(data = post.densities[["beta.site[7]"]], aes(x,y), color = "grey80") + 
+  xaxis + plot.opts
+
+sd.site.plot <- ggplot() +   geom_line(data = post.densities[["sd.site"]], aes(x,y)) + 
+  xaxis + plot.opts
+
+beta.trt.plot <- ggplot() + 
+  geom_line(data = post.densities[["beta.trt[2]"]], aes(x,y), color = "grey30") + 
+  geom_line(data = post.densities[["beta.trt[3]"]], aes(x,y), color = "grey45") +
+  geom_line(data = post.densities[["beta.trt[4]"]], aes(x,y), color = "grey60") + 
+  geom_line(data = post.densities[["beta.trt[5]"]], aes(x,y), color = "grey70") + 
+  geom_line(data = post.densities[["beta.trt[6]"]], aes(x,y), color = "grey80") +
+  xaxis + plot.opts
+
+sd.trt.plot <- ggplot() +   geom_line(data = post.densities[["sd.trt"]], aes(x,y)) + 
+  xaxis + plot.opts
+
+setwd('~/research/writing/pecan/mamodelfigs/')
+
+figplot.pdf <- function(plotname){
+  pdf(file = paste(plotname, ".pdf", sep = ""), height = 2, width = 8)
+  print(eval(parse(text = plotname)))
+  dev.off()
+}
+
+figplot.eps <- function(plotname){
+  postscript(file = paste(plotname, ".eps", sep = ""), height = 2, width = 8, 
+      horizontal = FALSE, onefile = FALSE, paper = "special")
+  print(eval(parse(text = plotname)))
+  dev.off()
+}
+
+
+fignames <- c("beta.o.plot", "sd.y.plot", "beta.site.plot", 
+              "sd.site.plot", "beta.trt.plot", "sd.trt.plot", "beta.ghs.plot")
+sapply(fignames, figplot.eps)
+
+
+@ 
+
