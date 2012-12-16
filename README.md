@@ -7,8 +7,7 @@ archived PEcAn source code, plus dependencies and documentation. A staging area 
 
 ### PEcAn 1.1: LeBauer et al. (2013)
 
-contents of the `pecan_1.1` folder:
-* `pecan/` source code
+* `pecan/` source code (version 1.1)
 * `manuscript` source code for manuscript (including R code used to generate results)
 * `JAGS-2.2.0` The JAGS v 2.2.0 source code.  official repository is hosted at Sourceforge. http://www.sourceforge.net/p/mcmc-jags
 * `ED2.2`
